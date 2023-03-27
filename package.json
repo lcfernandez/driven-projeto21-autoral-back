@@ -1,0 +1,39 @@
+{
+  "name": "projeto21-moodtasks-back",
+  "version": "1.0.0",
+  "description": "Parte do projeto 21 da Driven - Projeto moodtasks",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
+    "test": "NODE_ENV=test jest --passWithNoTests --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lcfernandez/driven-projeto21-moodtasks-back.git"
+  },
+  "keywords": [
+    "driven",
+    "moodtasks",
+    "api",
+    "node",
+    "express",
+    "javascript",
+    "typescript",
+    "sql",
+    "postgres",
+    "prisma",
+    "integration",
+    "unit",
+    "tests",
+    "lcfernandez"
+  ],
+  "author": "lcfernandez",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/lcfernandez/driven-projeto21-moodtasks-back/issues"
+  },
+  "homepage": "https://github.com/lcfernandez/driven-projeto21-moodtasks-back#readme"
+}
