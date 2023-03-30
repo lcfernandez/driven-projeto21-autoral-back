@@ -1,7 +1,7 @@
 {
   "name": "projeto21-moodtasks-back",
   "version": "1.0.0",
-  "description": "Parte do projeto 21 da Driven - Projeto moodtasks",
+  "description": "Parte do projeto 21 da Driven - Projeto Moodtasks",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
