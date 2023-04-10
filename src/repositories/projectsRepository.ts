@@ -5,7 +5,7 @@ async function create(name: string, userId: number) {
 }
 
 async function findById(id: number) {
-  return await prisma.projects.findFirst({ where: { id } });
+  return await prisma.projects.findUnique({ where: { id } });
 }
 
 async function findByName(name: string, userId: number) {
@@ -20,6 +20,10 @@ async function findByName(name: string, userId: number) {
   });
 }
 
+async function remove(id: number) {
+  return await prisma.projects.delete({ where: { id } });
+}
+
 async function update(id: number, name: string) {
   return await prisma.projects.update({ where: { id }, data: { name } });
 }
@@ -28,5 +32,6 @@ export const projectRepository = {
   create,
   findById,
   findByName,
+  remove,
   update
 };
