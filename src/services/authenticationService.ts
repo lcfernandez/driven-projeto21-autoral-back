@@ -1,4 +1,23 @@
+import { invalidCredentialsError } from "../errors/invalidCredentialsError.js";
 import { authenticationRepository } from "../repositories/authenticationRepository.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+async function signIn(email: string, password: string) {
+  const user = await authenticationRepository.findByEmail(email.toLowerCase());
+
+  if (!user) throw invalidCredentialsError();
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) throw invalidCredentialsError();
+
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+  await authenticationRepository.insertToken(user.id, token);
+
+  return token;
+}
 
 async function signUp(name: string, email: string, password: string) {
   const emailExists = await authenticationRepository.findByEmail(email.toLowerCase());
@@ -14,5 +33,6 @@ async function signUp(name: string, email: string, password: string) {
 }
 
 export const authenticationService = {
+  signIn,
   signUp
 };

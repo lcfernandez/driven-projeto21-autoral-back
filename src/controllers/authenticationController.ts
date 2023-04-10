@@ -1,6 +1,18 @@
 import { Request, Response } from "express";
 import { authenticationService } from "../services/authenticationService.js";
 
+export async function signIn(req: Request, res: Response) {
+  const { email, password } = req.body;
+
+  try {
+    const result = await authenticationService.signIn(email, password);
+
+    res.status(200).send(result);
+  } catch (err) {
+    res.sendStatus(401);
+  }
+}
+
 export async function signUp(req: Request, res: Response) {
   const { name, email, password } = req.body;
 

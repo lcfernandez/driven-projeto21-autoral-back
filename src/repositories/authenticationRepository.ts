@@ -5,6 +5,10 @@ async function findByEmail(email: string) {
   return await prisma.users.findUnique({ where: { email }});
 }
 
+async function insertToken(userId: number, token: string) {
+  await prisma.users.update({ where: { id: userId }, data: { token }});
+}
+
 async function insertUser(name: string, email: string, password: string) {
   const cryptedPassword: string = bcrypt.hashSync(password, 12);
 
@@ -20,5 +24,6 @@ async function insertUser(name: string, email: string, password: string) {
 
 export const authenticationRepository = {
   findByEmail,
+  insertToken,
   insertUser
 };
