@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { authenticateToken } from "./middlewares/authValidationMiddleware.js";
 import { authenticationRouter } from "./routers/authenticationRouter.js";
+import { projectsRouter } from "./routers/projectsRouter.js";
 
 // instance of express
 const app = express();
@@ -10,6 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(authenticationRouter);
+app.use(authenticateToken);
+app.use(projectsRouter);
 dotenv.config();
 
 const port = process.env.PORT || 5000;

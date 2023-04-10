@@ -2,11 +2,11 @@ import { prisma } from "../configs/database.js";
 import bcrypt from "bcrypt";
 
 async function findByEmail(email: string) {
-  return await prisma.users.findUnique({ where: { email }});
+  return await prisma.users.findUnique({where: { email } });
 }
 
 async function insertToken(userId: number, token: string) {
-  await prisma.users.update({ where: { id: userId }, data: { token }});
+  await prisma.users.update({ where: { id: userId }, data: { token } });
 }
 
 async function insertUser(name: string, email: string, password: string) {
@@ -19,7 +19,7 @@ async function insertUser(name: string, email: string, password: string) {
       password: cryptedPassword,
       token: ""
     }
-  })
+  });
 }
 
 export const authenticationRepository = {

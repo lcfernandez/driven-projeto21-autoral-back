@@ -1,5 +1,45 @@
 import { NextFunction, Request, Response } from "express";
+import { prisma } from "../configs/database.js";
 import { signInSchema, signUpSchema } from "../schemas/authenticationSchemas.js";
+import { unauthorizedError } from "../errors.js";
+import jwt from "jsonwebtoken";
+
+function generateUnauthorizedResponse(res: Response) {
+  res.status(401).send(unauthorizedError());
+}
+
+type JWTPayload = {
+  userId: number;
+};
+
+export type AuthenticatedRequest = Request & JWTPayload;
+
+export async function authenticateToken(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const authHeader = req.header("Authorization");
+  
+  if (!authHeader) return generateUnauthorizedResponse(res);
+
+  const token = authHeader.split(" ")[1];
+  if (!token) return generateUnauthorizedResponse(res);
+
+  try {
+    const { userId } = jwt.verify(token, process.env.JWT_SECRET) as JWTPayload;
+
+    const session = await prisma.users.findFirst({
+      where: {
+        token,
+      },
+    });
+
+    if (!session) return generateUnauthorizedResponse(res);
+
+    req.userId = userId;
+    
+    return next();
+  } catch (err) {
+    return generateUnauthorizedResponse(res);
+  }
+}
 
 export function signInSchemaValidation(req: Request, res: Response, next: NextFunction) {
   const { error } = signInSchema.validate(req.body, { abortEarly: false });
