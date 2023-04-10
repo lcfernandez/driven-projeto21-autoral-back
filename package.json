@@ -38,6 +38,7 @@
   "homepage": "https://github.com/lcfernandez/driven-projeto21-moodtasks-back#readme",
   "dependencies": {
     "@prisma/client": "^4.11.0",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
