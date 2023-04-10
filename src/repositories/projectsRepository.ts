@@ -4,6 +4,10 @@ async function create(name: string, userId: number) {
   await prisma.projects.create({ data: { name, user_id: userId, status_id: 1 } });
 }
 
+async function findAll(id: number) {
+  return await prisma.projects.findMany({ where: { user_id: id } });
+}
+
 async function findById(id: number) {
   return await prisma.projects.findUnique({ where: { id } });
 }
@@ -30,6 +34,7 @@ async function update(id: number, name: string) {
 
 export const projectRepository = {
   create,
+  findAll,
   findById,
   findByName,
   remove,

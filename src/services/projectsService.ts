@@ -9,6 +9,10 @@ async function create(name: string, userId: number) {
   await projectRepository.create(name, userId);
 }
 
+async function findAll(id: number) {
+  return await projectRepository.findAll(id);
+}
+
 async function remove(id: number, userId: number) {
   if (isNaN(id)) throw projectNotFoundError();
 
@@ -39,6 +43,7 @@ async function update(id: number, name: string, userId: number) {
 
 export const projectsService = {
   create,
+  findAll,
   remove,
   update
 };

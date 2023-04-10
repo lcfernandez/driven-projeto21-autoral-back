@@ -18,6 +18,16 @@ export async function create(req: AuthenticatedRequest, res: Response) {
   }
 }
 
+export async function findAll(req: AuthenticatedRequest, res: Response) {
+  try {
+    const result = await projectsService.findAll(req.userId);
+
+    res.status(200).send(result);
+  } catch (err) {
+    res.sendStatus(400);
+  }
+}
+
 export async function remove(req: AuthenticatedRequest, res: Response) {
   const id = Number(req.params.id);
   
