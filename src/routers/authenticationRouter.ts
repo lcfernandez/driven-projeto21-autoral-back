@@ -4,5 +4,5 @@ import { signInSchemaValidation, signUpSchemaValidation } from "../middlewares/a
 
 export const authenticationRouter = Router();
 
-authenticationRouter.post("/sign-up", signUpSchemaValidation, signUp);
 authenticationRouter.post("/sign-in", signInSchemaValidation, signIn);
+authenticationRouter.post("/sign-up", signUpSchemaValidation, signUp);
