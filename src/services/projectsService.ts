@@ -36,7 +36,7 @@ async function update(id: number, name: string, userId: number) {
 
   const projectNameExists = await projectRepository.findByName(name, userId);
   
-  if (projectNameExists) throw duplicatedProjectError();
+  if (projectNameExists && projectNameExists.id !== id) throw duplicatedProjectError();
   
   await projectRepository.update(id, name);
 }
