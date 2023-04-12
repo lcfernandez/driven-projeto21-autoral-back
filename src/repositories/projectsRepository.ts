@@ -5,7 +5,7 @@ async function create(name: string, userId: number) {
 }
 
 async function findAll(id: number) {
-  return await prisma.projects.findMany({ where: { user_id: id } });
+  return await prisma.projects.findMany({ where: { user_id: id }, orderBy: { created_at: "desc" } });
 }
 
 async function findById(id: number) {
