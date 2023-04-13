@@ -1,7 +1,8 @@
 import { prisma } from "../configs/database.js";
 
 async function create(name: string, userId: number) {
-  await prisma.projects.create({ data: { name, user_id: userId, status_id: 1 } });
+  const { id } = await prisma.projects.create({ data: { name, user_id: userId, status_id: 1 } });
+  await prisma.moodboards.create({ data: { project_id: id } });
 }
 
 async function findAll(id: number) {
@@ -25,11 +26,12 @@ async function findByName(name: string, userId: number) {
 }
 
 async function remove(id: number) {
-  return await prisma.projects.delete({ where: { id } });
+  await prisma.moodboards.deleteMany({ where: { project_id: id } });
+  await prisma.projects.delete({ where: { id } });
 }
 
 async function update(id: number, name: string) {
-  return await prisma.projects.update({ where: { id }, data: { name } });
+  await prisma.projects.update({ where: { id }, data: { name } });
 }
 
 export const projectRepository = {
