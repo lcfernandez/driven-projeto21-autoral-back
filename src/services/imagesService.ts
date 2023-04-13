@@ -23,8 +23,10 @@ async function findAll(projectId: number, userId: number) {
   if (projectExists.user_id !== userId) throw forbiddenError();
   
   const moodboard = await moodboardRepository.findByProjectId(projectId);
-  
-  return await imagesRepository.findAll(moodboard[0].id);
+
+  const images = await imagesRepository.findAll(moodboard[0].id);
+
+  return { project_name: projectExists.name, moodboard_id: moodboard[0].id, images };
 }
 
 async function remove(id: number, userId: number) {

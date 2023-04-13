@@ -5,11 +5,10 @@ async function create(url: string, moodboardId: number) {
 }
 
 async function findAll(moodboardId: number) {
-  const images = await prisma.moodboards_images.findMany({
+  return await prisma.moodboards_images.findMany({
     where: { moodboard_id: moodboardId },
     orderBy: { created_at: "desc" }
   });
-  return { moodboard_id: moodboardId, images };
 }
 
 async function findById(id: number) {
