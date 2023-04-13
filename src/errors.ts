@@ -12,10 +12,24 @@ export function forbiddenError() {
   };
 }
 
+export function imageNotFoundError() {
+  return {
+    name: "ImageNotFoundError",
+    message: "There is no image with given id",
+  };
+}
+
 export function invalidCredentialsError() {
   return {
     name: "InvalidCredentialsError",
     message: "E-mail or password are incorrect",
+  };
+}
+
+export function moodboardNotFoundError() {
+  return {
+    name: "MoodboardNotFoundError",
+    message: "There is no moodboard with given id",
   };
 }
 

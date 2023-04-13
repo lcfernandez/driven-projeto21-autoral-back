@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../middlewares/authValidationMiddleware";
 import { projectsService } from "../services/projectsService.js";
+import { imagesService } from "../services/imagesService.js";
 
 export async function create(req: AuthenticatedRequest, res: Response) {
   const { name } = req.body;
@@ -24,6 +25,25 @@ export async function findAll(req: AuthenticatedRequest, res: Response) {
 
     res.status(200).send(result);
   } catch (err) {
+    res.sendStatus(400);
+  }
+}
+
+export async function getMoodboard(req: AuthenticatedRequest, res: Response) {
+  const projectId = Number(req.params.id);
+  
+  try {
+    const moodboard = await imagesService.findAll(projectId, req.userId);
+
+    res.status(200).send(moodboard);
+  } catch (err) {
+    if (err.name === "ProjectNotFoundError") {
+      return res.status(404).send(err.message);
+    }
+    if (err.name === "ForbiddenError") {
+      return res.status(403).send(err.message);
+    }
+    
     res.sendStatus(400);
   }
 }
