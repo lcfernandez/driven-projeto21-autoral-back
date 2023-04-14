@@ -1,3 +1,10 @@
+export function duplicatedLaneError() {
+  return {
+    name: "DuplicatedLaneError",
+    message: "There is already a lane with given name",
+  };
+}
+
 export function duplicatedProjectError() {
   return {
     name: "DuplicatedProjectError",
@@ -23,6 +30,13 @@ export function invalidCredentialsError() {
   return {
     name: "InvalidCredentialsError",
     message: "E-mail or password are incorrect",
+  };
+}
+
+export function laneNotFoundError() {
+  return {
+    name: "LaneeNotFoundError",
+    message: "There is no lane with given id",
   };
 }
 
