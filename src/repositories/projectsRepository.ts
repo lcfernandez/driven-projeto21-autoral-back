@@ -31,7 +31,7 @@ async function remove(id: number) {
   
   await prisma.moodboards_images.deleteMany({ where: { moodboard_id: moodboard[0].id } });
   await prisma.moodboards.deleteMany({ where: { project_id: id } });
-  // TODO: cards delete implementation
+  await prisma.cards.deleteMany({ where: { lanes: { project_id: id} } });
   await prisma.lanes.deleteMany({ where: { project_id: id } });
   await prisma.projects.delete({ where: { id } });
 }

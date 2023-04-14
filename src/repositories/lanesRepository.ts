@@ -7,7 +7,7 @@ async function create(title: string, projectId: number) {
 async function findAll(projectId: number) {
   return await prisma.lanes.findMany({
     where: { project_id: projectId },
-    include: { cards: true },
+    include: { cards: { orderBy: { created_at: "desc" } } },
     orderBy: { created_at: "desc" }
   });
 }
@@ -33,7 +33,7 @@ async function findByTitle(title: string, projectId: number) {
 }
 
 async function remove(id: number) {
-  // TODO: cards delete implementation
+  await prisma.cards.deleteMany({ where: { lane_id: id } });
   await prisma.lanes.delete({ where: { id } });
 }
 

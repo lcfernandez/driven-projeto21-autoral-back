@@ -6,6 +6,7 @@ import { authenticationRouter } from "./routers/authenticationRouter.js";
 import { projectsRouter } from "./routers/projectsRouter.js";
 import { imagesRouter } from "./routers/imagesRouter.js";
 import { lanesRouter } from "./routers/lanesRouter.js";
+import { cardsRouter } from "./routers/cardsRouter.js";
 
 // instance of express
 const app = express();
@@ -18,6 +19,7 @@ app.use(authenticateToken);
 app.use(projectsRouter);
 app.use(imagesRouter);
 app.use(lanesRouter);
+app.use(cardsRouter);
 dotenv.config();
 
 const port = process.env.PORT || 5000;

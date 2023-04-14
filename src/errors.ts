@@ -33,9 +33,16 @@ export function invalidCredentialsError() {
   };
 }
 
+export function cardNotFoundError() {
+  return {
+    name: "CardNotFoundError",
+    message: "There is no card with given id",
+  };
+}
+
 export function laneNotFoundError() {
   return {
-    name: "LaneeNotFoundError",
+    name: "LaneNotFoundError",
     message: "There is no lane with given id",
   };
 }
