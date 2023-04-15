@@ -13,7 +13,7 @@ async function findById(id: number) {
 }
 
 async function findByProjectId(projectId: number) {
-  return await prisma.moodboards.findMany({ where: { project_id: projectId }});
+  return await prisma.moodboards.findFirst({ where: { project_id: projectId }});
 }
 
 export const moodboardRepository = {

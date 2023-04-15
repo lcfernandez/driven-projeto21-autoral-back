@@ -24,9 +24,9 @@ async function findAll(projectId: number, userId: number) {
   
   const moodboard = await moodboardRepository.findByProjectId(projectId);
 
-  const images = await imagesRepository.findAll(moodboard[0].id);
+  const images = await imagesRepository.findAll(moodboard.id);
 
-  return { project_name: projectExists.name, moodboard_id: moodboard[0].id, images };
+  return { project_name: projectExists.name, moodboard_id: moodboard.id, images };
 }
 
 async function remove(id: number, userId: number) {

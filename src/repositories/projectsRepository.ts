@@ -2,7 +2,8 @@ import { prisma } from "../configs/database.js";
 import { moodboardRepository } from "./moodboardRepository.js";
 
 async function create(name: string, userId: number) {
-  const { id } = await prisma.projects.create({ data: { name, user_id: userId, status_id: 1 } });
+  const plannedStatus = await prisma.status.findFirst({ where: { name: "Planejamento" } });
+  const { id } = await prisma.projects.create({ data: { name, user_id: userId, status_id: plannedStatus.id } });
   await prisma.moodboards.create({ data: { project_id: id } });
 }
 
@@ -29,7 +30,7 @@ async function findByName(name: string, userId: number) {
 async function remove(id: number) {
   const moodboard = await moodboardRepository.findByProjectId(id);
   
-  await prisma.moodboards_images.deleteMany({ where: { moodboard_id: moodboard[0].id } });
+  await prisma.moodboards_images.deleteMany({ where: { moodboard_id: moodboard.id } });
   await prisma.moodboards.deleteMany({ where: { project_id: id } });
   await prisma.cards.deleteMany({ where: { lanes: { project_id: id} } });
   await prisma.lanes.deleteMany({ where: { project_id: id } });
