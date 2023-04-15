@@ -4,14 +4,6 @@ async function create(title: string, laneId: number) {
   await prisma.cards.create({ data: { title, position: 0, lane_id: laneId } });
 }
 
-/* async function findAll(projectId: number) {
-  return await prisma.lanes.findMany({
-    where: { project_id: projectId },
-    include: { cards: true },
-    orderBy: { created_at: "desc" }
-  });
-}*/
-
 async function findById(id: number) {
   return await prisma.cards.findUnique({ where: { id },
     include: {
@@ -34,7 +26,6 @@ async function update(id: number, title: string) {
 
 export const cardsRepository = {
   create,
-  //findAll,
   findById,
   remove,
   update

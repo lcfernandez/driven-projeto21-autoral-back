@@ -12,18 +12,6 @@ async function create(title: string, laneId: number, userId: number) {
   await cardsRepository.create(title, laneId);
 }
 
-/* async function findAll(projectId: number, userId: number) {
-  if (isNaN(projectId)) throw projectNotFoundError();
-
-  const projectExists = await projectRepository.findById(projectId);
-  
-  if (!projectExists) throw projectNotFoundError();
-  
-  if (projectExists.user_id !== userId) throw forbiddenError();
-
-  return await lanesRepository.findAll(projectId);
-}*/
-
 async function remove(id: number, userId: number) {
   if (isNaN(id)) throw cardNotFoundError();
 
@@ -50,7 +38,6 @@ async function update(id: number, title: string, userId: number) {
 
 export const cardsService = {
   create,
-  //findAll,
   remove,
   update
 };
