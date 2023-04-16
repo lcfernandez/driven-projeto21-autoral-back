@@ -6,11 +6,12 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon src/index.ts",
-    "start": "node dist/index.js",
-    "test": "NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
+    "start": "npm run prisma:migrate:deploy && node dist/src/index.js",
+    "test": "dotenv -e .env.test npm run prisma:migrate:deploy && NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
     "prisma:seed": "npx prisma db seed",
-    "dev:migration": "npx prisma migrate dev",
-    "test:migration": "npx dotenv -e .env.test npx prisma migrate dev --jobs postgres-init"
+    "prisma:migrate:dev": "npx prisma migrate dev",
+    "prisma:migrate:test": "npx dotenv -e .env.test npx prisma migrate dev --jobs postgres-init",
+    "prisma:migrate:deploy": "npx prisma migrate deploy"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
