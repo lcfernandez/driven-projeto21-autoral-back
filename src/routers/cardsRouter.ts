@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { create , remove, update } from "../controllers/cardsController.js";
-import { cardsSchemaValidation } from "../middlewares/cardsValidationMiddleware.js";
+import { create , remove, update } from "../controllers/cardsController";
+import { cardsSchemaValidation } from "../middlewares/cardsValidationMiddleware";
 
 export const cardsRouter = Router();
 

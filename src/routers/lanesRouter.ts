@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { create, remove, update } from "../controllers/lanesController.js";
-import { lanesSchemaValidation } from "../middlewares/lanesValidationMiddleware.js";
+import { create, remove, update } from "../controllers/lanesController";
+import { lanesSchemaValidation } from "../middlewares/lanesValidationMiddleware";
 
 export const lanesRouter = Router();
 

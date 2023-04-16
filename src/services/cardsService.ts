@@ -1,6 +1,6 @@
-import { cardNotFoundError, forbiddenError, laneNotFoundError } from "../errors.js";
-import { cardsRepository } from "../repositories/cardsRepository.js";
-import { lanesRepository } from "../repositories/lanesRepository.js";
+import { cardNotFoundError, forbiddenError, laneNotFoundError } from "../errors";
+import { cardsRepository } from "../repositories/cardsRepository";
+import { lanesRepository } from "../repositories/lanesRepository";
 
 async function create(title: string, laneId: number, userId: number) {
   const laneExists = await lanesRepository.findById(laneId);
@@ -9,7 +9,7 @@ async function create(title: string, laneId: number, userId: number) {
 
   if (laneExists.projects.user_id !== userId) throw forbiddenError();
   
-  await cardsRepository.create(title, laneId);
+  return await cardsRepository.create(title, laneId);
 }
 
 async function remove(id: number, userId: number) {
@@ -25,7 +25,7 @@ async function remove(id: number, userId: number) {
 }
 
 async function update(id: number, title: string, userId: number) {
-  if (isNaN(id)) throw laneNotFoundError();
+  if (isNaN(id)) throw cardNotFoundError();
 
   const cardExists = await cardsRepository.findById(id);
   

@@ -1,7 +1,8 @@
-import { prisma } from "../configs/database.js";
+import { prisma } from "../configs/database";
 
 async function create(title: string, projectId: number) {
-  await prisma.lanes.create({ data: { title, position: 0, project_id: projectId } });
+  const { id } = await prisma.lanes.create({ data: { title, position: 0, project_id: projectId } });
+  return { id };
 }
 
 async function findAll(projectId: number) {

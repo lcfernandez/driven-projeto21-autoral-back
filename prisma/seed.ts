@@ -1,4 +1,4 @@
-import { prisma } from "../src/configs/database.js"
+import { prisma } from "../src/configs/database"
 
 async function main() {
   await prisma.status.createMany({

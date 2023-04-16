@@ -1,12 +1,12 @@
-import { duplicatedProjectError, forbiddenError, projectNotFoundError } from "../errors.js";
-import { projectRepository } from "../repositories/projectsRepository.js";
+import { duplicatedProjectError, forbiddenError, projectNotFoundError } from "../errors";
+import { projectRepository } from "../repositories/projectsRepository";
 
 async function create(name: string, userId: number) {
   const projectNameExists = await projectRepository.findByName(name, userId);
   
   if (projectNameExists) throw duplicatedProjectError();
   
-  await projectRepository.create(name, userId);
+  return await projectRepository.create(name, userId);
 }
 
 async function findAll(id: number) {

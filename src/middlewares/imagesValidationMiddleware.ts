@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { imagesSchema } from "../schemas/imagesSchemas.js";
+import { imagesSchema } from "../schemas/imagesSchemas";
 
 export function imagesSchemaValidation(req: Request, res: Response, next: NextFunction) {
   const { error } = imagesSchema.validate(req.body, { abortEarly: false });

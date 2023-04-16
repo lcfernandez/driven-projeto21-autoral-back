@@ -1,7 +1,8 @@
-import { prisma } from "../configs/database.js";
+import { prisma } from "../configs/database";
 
 async function create(url: string, moodboardId: number) {
-  await prisma.moodboards_images.create({ data: { url, pos_x: 0, pos_y: 0, high: 0, width: 0, moodboard_id: moodboardId } });
+  const { id } = await prisma.moodboards_images.create({ data: { url, pos_x: 0, pos_y: 0, high: 0, width: 0, moodboard_id: moodboardId } });
+  return { id };
 }
 
 async function findAll(moodboardId: number) {

@@ -1,5 +1,5 @@
-import { invalidCredentialsError } from "../errors.js";
-import { authenticationRepository } from "../repositories/authenticationRepository.js";
+import { invalidCredentialsError } from "../errors";
+import { authenticationRepository } from "../repositories/authenticationRepository";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

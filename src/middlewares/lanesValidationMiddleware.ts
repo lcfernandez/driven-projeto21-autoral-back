@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { lanesSchema } from "../schemas/lanesSchemas.js";
+import { lanesSchema } from "../schemas/lanesSchemas";
 
 export function lanesSchemaValidation(req: Request, res: Response, next: NextFunction) {
   const { error } = lanesSchema.validate(req.body, { abortEarly: false });

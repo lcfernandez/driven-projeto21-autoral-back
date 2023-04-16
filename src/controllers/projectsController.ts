@@ -1,16 +1,16 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../middlewares/authValidationMiddleware";
-import { projectsService } from "../services/projectsService.js";
-import { imagesService } from "../services/imagesService.js";
-import { lanesService } from "../services/lanesService.js";
+import { projectsService } from "../services/projectsService";
+import { imagesService } from "../services/imagesService";
+import { lanesService } from "../services/lanesService";
 
 export async function create(req: AuthenticatedRequest, res: Response) {
   const { name } = req.body;
 
   try {
-    await projectsService.create(name, req.userId);
+    const result = await projectsService.create(name, req.userId);
 
-    res.sendStatus(201);
+    res.status(201).send(result);
   } catch (err) {
     if (err.name === "DuplicatedProjectError") {
       return res.status(409).send(err.message);

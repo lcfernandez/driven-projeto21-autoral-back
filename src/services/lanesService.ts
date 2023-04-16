@@ -1,6 +1,6 @@
-import { duplicatedLaneError, forbiddenError, laneNotFoundError, projectNotFoundError } from "../errors.js";
-import { lanesRepository } from "../repositories/lanesRepository.js";
-import { projectRepository } from "../repositories/projectsRepository.js";
+import { duplicatedLaneError, forbiddenError, laneNotFoundError, projectNotFoundError } from "../errors";
+import { lanesRepository } from "../repositories/lanesRepository";
+import { projectRepository } from "../repositories/projectsRepository";
 
 async function create(title: string, projectId: number, userId: number) {
   const projectExists = await projectRepository.findById(projectId);
@@ -13,7 +13,7 @@ async function create(title: string, projectId: number, userId: number) {
   
   if (laneTitleExists) throw duplicatedLaneError();  
   
-  await lanesRepository.create(title, projectId);
+  return await lanesRepository.create(title, projectId);
 }
 
 async function findAll(projectId: number, userId: number) {

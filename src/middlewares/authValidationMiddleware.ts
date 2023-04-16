@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { prisma } from "../configs/database.js";
-import { signInSchema, signUpSchema } from "../schemas/authenticationSchemas.js";
-import { unauthorizedError } from "../errors.js";
+import { prisma } from "../configs/database";
+import { signInSchema, signUpSchema } from "../schemas/authenticationSchemas";
+import { unauthorizedError } from "../errors";
 import jwt from "jsonwebtoken";
 
 function generateUnauthorizedResponse(res: Response) {

@@ -1,4 +1,4 @@
-import { prisma } from "../configs/database.js";
+import { prisma } from "../configs/database";
 
 async function findById(id: number) {
   return await prisma.moodboards.findUnique({

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { cardsSchema } from "../schemas/cardsSchemas.js";
+import { cardsSchema } from "../schemas/cardsSchemas";
 
 export function cardsSchemaValidation(req: Request, res: Response, next: NextFunction) {
   const { error } = cardsSchema.validate(req.body, { abortEarly: false });

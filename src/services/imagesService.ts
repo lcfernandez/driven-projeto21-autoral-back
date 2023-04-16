@@ -1,7 +1,7 @@
-import { forbiddenError, imageNotFoundError, moodboardNotFoundError, projectNotFoundError } from "../errors.js";
-import { imagesRepository } from "../repositories/imagesRepository.js";
-import { moodboardRepository } from "../repositories/moodboardRepository.js";
-import { projectRepository } from "../repositories/projectsRepository.js";
+import { forbiddenError, imageNotFoundError, moodboardNotFoundError, projectNotFoundError } from "../errors";
+import { imagesRepository } from "../repositories/imagesRepository";
+import { moodboardRepository } from "../repositories/moodboardRepository";
+import { projectRepository } from "../repositories/projectsRepository";
 
 async function create(url: string, moodboardId: number, userId: number) {
   const moodboardExists = await moodboardRepository.findById(moodboardId);
@@ -10,7 +10,7 @@ async function create(url: string, moodboardId: number, userId: number) {
 
   if (moodboardExists.projects.user_id !== userId) throw forbiddenError();
   
-  await imagesRepository.create(url, moodboardId);
+  return await imagesRepository.create(url, moodboardId);
 }
 
 async function findAll(projectId: number, userId: number) {

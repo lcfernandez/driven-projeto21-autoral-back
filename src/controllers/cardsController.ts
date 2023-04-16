@@ -1,14 +1,14 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../middlewares/authValidationMiddleware";
-import { cardsService } from "../services/cardsService.js";
+import { cardsService } from "../services/cardsService";
 
 export async function create(req: AuthenticatedRequest, res: Response) {
   const { title, lane_id } = req.body;
 
   try {
-    await cardsService.create(title,lane_id, req.userId);
+    const result = await cardsService.create(title,lane_id, req.userId);
 
-    res.sendStatus(201);
+    res.status(201).send(result);
   } catch (err) {
     if (err.name === "LaneNotFoundError") {
       return res.status(404).send(err.message);
@@ -49,6 +49,9 @@ export async function update(req: AuthenticatedRequest, res: Response) {
 
     res.sendStatus(200);
   } catch (err) {
+    if (err.name === "CardNotFoundError") {
+      return res.status(404).send(err.message);
+    }
     if (err.name === "ForbiddenError") {
       return res.status(403).send(err.message);
     }

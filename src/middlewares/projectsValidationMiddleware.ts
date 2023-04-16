@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { projectsSchema } from "../schemas/projectsSchemas.js";
+import { projectsSchema } from "../schemas/projectsSchemas";
 
 export function projectsSchemaValidation(req: Request, res: Response, next: NextFunction) {
   const { error } = projectsSchema.validate(req.body, { abortEarly: false });

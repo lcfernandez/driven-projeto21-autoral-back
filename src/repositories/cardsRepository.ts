@@ -1,7 +1,8 @@
-import { prisma } from "../configs/database.js";
+import { prisma } from "../configs/database";
 
 async function create(title: string, laneId: number) {
-  await prisma.cards.create({ data: { title, position: 0, lane_id: laneId } });
+  const { id } = await prisma.cards.create({ data: { title, position: 0, lane_id: laneId } });
+  return { id };
 }
 
 async function findById(id: number) {

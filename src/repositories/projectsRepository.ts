@@ -1,10 +1,12 @@
-import { prisma } from "../configs/database.js";
-import { moodboardRepository } from "./moodboardRepository.js";
+import { prisma } from "../configs/database";
+import { moodboardRepository } from "./moodboardRepository";
 
 async function create(name: string, userId: number) {
   const plannedStatus = await prisma.status.findFirst({ where: { name: "Planejamento" } });
   const { id } = await prisma.projects.create({ data: { name, user_id: userId, status_id: plannedStatus.id } });
   await prisma.moodboards.create({ data: { project_id: id } });
+
+  return { id };
 }
 
 async function findAll(id: number) {

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { create, findAll, getLanes, getMoodboard, remove, update } from "../controllers/projectsController.js";
-import { projectsSchemaValidation } from "../middlewares/projectsValidationMiddleware.js";
+import { create, findAll, getLanes, getMoodboard, remove, update } from "../controllers/projectsController";
+import { projectsSchemaValidation } from "../middlewares/projectsValidationMiddleware";
 
 export const projectsRouter = Router();
 

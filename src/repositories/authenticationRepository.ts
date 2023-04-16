@@ -1,4 +1,4 @@
-import { prisma } from "../configs/database.js";
+import { prisma } from "../configs/database";
 import bcrypt from "bcrypt";
 
 async function findByEmail(email: string) {
