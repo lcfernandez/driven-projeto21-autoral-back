@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon src/index.ts",
-    "start": "npm run prisma:migrate:deploy && node dist/src/index.js",
+    "start": "npm run prisma:migrate:deploy && npm run prisma:seed && node dist/src/index.js",
     "test": "dotenv -e .env.test npm run prisma:migrate:deploy && NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
     "prisma:seed": "npx prisma db seed",
     "prisma:migrate:dev": "npx prisma migrate dev",
